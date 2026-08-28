@@ -7,7 +7,9 @@ from app.models.work_order import WorkOrder
 from app.models.service_report import ServiceReport
 
 import asyncio
-
+"""makse sure postgre driver is installed
+pip install "sqlalchemy[asyncio]" asyncpg
+"""
 async def create_tables():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
