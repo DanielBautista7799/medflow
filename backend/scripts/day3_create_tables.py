@@ -5,6 +5,7 @@ from app.models.hospital import Hospital
 from app.models.equipment import Equipment
 from app.models.work_order import WorkOrder
 from app.models.service_report import ServiceReport
+from app.models.technician import Technician
 
 import asyncio
 """makse sure postgre driver is installed

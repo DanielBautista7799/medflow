@@ -16,6 +16,12 @@ CREATE TABLE hospitals(
     supervisor_id INTEGER NOT NULL
 );
 
+CREATE TABLE technicians (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    facility_id INTEGER NOT NULL REFERENCES hospitals(id)
+);
+
 CREATE TABLE equipment(
     id SERIAL PRIMARY KEY,
     serial_number VARCHAR(100) NOT NULL UNIQUE,
@@ -32,8 +38,7 @@ CREATE TABLE work_orders(
     priority work_order_priority NOT NULL,
     status work_order_status NOT NULL,
     equipment_id INTEGER NOT NULL REFERENCES equipment(id),
-    --ask about technican table
-    technician_id INTEGER NOT NULL
+    technician_id INTEGER NOT NULL REFERENCES technican(id)
 );
 
 CREATE TABLE service_reports(
@@ -43,3 +48,5 @@ CREATE TABLE service_reports(
     notes TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+

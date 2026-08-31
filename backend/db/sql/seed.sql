@@ -7,7 +7,15 @@ INSERT INTO hospitals (id, name, location_region, capacity, supervisor_id) VALUE
 (4, 'Westview Regional Hospital', 'West', 325, 104);
 
 SELECT setval('hospitals_id_seq', (SELECT MAX(id) FROM hospitals));
+-- technicians
 
+INSERT INTO technicians (id, name, facility_id) VALUES
+
+(201, 'Alex Morgan', 1),
+(202, 'Jordan Lee', 2),
+(203, 'Taylor Brooks', 3),
+(204, 'Casey Rivera', 4);
+SELECT setval('technicians_id_seq', (SELECT MAX(id) FROM technicians));
 
 -- equipment
 

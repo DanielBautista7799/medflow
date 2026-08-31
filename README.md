@@ -21,8 +21,21 @@ createdb medflow_dev
 
 CONNECT DATABASE
 psql -d medflow_dev
+    `
+INSTALL FASTAPI
+python -m pip install "fastapi[standard]"
 
----
+if issues with interpreter or fastapi is greyed out
+⌘ + Shift + P
+→ Python: Select Interpreter
+→ Select backend/.venv/bin/python
+
+INSTALL SQLALCHEMY[asyncio]            
+python -m pip install "sqlalchemy[asyncio]" asyncpg
+
+INSTALL BCRYPT AND PYJWT
+python -m pip install bcrypt PyJWT
+
 
 ## 1. Business Context
 

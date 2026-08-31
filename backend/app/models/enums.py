@@ -16,3 +16,8 @@ class WorkOrderStatus(str, Enum):
     IN_PROGRESS = "In-Progress"
     COMPLETED = "Completed"
     FAILED = "Failed"
+
+class UserRole(str, Enum):
+    CLINICAL_ADMIN = "Clinical Admin"
+    FIELD_TECHNICIAN = "Field Technician"
+    AUDITOR = "Auditor"

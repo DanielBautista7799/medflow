@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .equipment import Equipment
+    from .technician import Technician
 
 class Hospital(Base):
     __tablename__ = "hospitals"
@@ -17,6 +18,8 @@ class Hospital(Base):
     supervisor_id: Mapped[int] = mapped_column(Integer)
 
     equipment: Mapped[list["Equipment"]] = relationship(back_populates="hospital")
+    technicians: Mapped[list["Technician"]] = relationship(back_populates="hospital")
+
 
     def __repr__(self)->str:
         return (f"id='{self.id}', name= '{self.name}', location_region='{self.location_region}'")
