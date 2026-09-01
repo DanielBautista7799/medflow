@@ -37,6 +37,14 @@ INSTALL BCRYPT AND PYJWT
 python -m pip install bcrypt PyJWT
 
 
+FRONTEND:
+npm create vite@latest frontend -- --template react
+cd frontend
+npm install
+
+styling packages
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+
 ## 1. Business Context
 
 **Halcyon Health Systems** operates a network of hospitals and outpatient clinics that rely on a large shared pool of portable medical equipment — infusion pumps, ventilators, patient monitors, and mobile imaging carts. Currently, equipment usage records, maintenance schedules, technician assignments, and service reports are scattered across paper logs and spreadsheet files kept at each site.
