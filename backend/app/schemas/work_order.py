@@ -17,8 +17,6 @@ class WorkOrderRead(BaseModel):
 class CoLocationDiscrepancyRead(BaseModel):
     work_order_id: int
     title:str = Field(min_length = 1, max_length = 150)
-    priority : WorkOrderPriority
-    status: WorkOrderStatus
     equipment_facility_id:int
     technician_facility_id: int
     model_config = ConfigDict(from_attributes=True)
