@@ -1,0 +1,3 @@
+Equipment inspection: normal
+Battery cycle count: 142
+Last calibration: within tolerance
