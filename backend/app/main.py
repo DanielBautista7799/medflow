@@ -12,7 +12,7 @@ FRONTEND_ORIGIN = os.environ.get(
 app = FastAPI(
     title="MedFlow Clinical Equipment Command Center",
     description="Clinical equipment management API for Halcyon Health Systems.",
-    version="0.1.0" 
+    version="0.2.0" 
 )
 
 # CORS is like a checkpoint between the frontend and backend.
@@ -38,3 +38,7 @@ app.include_router(auth.router)
 @app.get("/health", tags=["health"])
 async def health_check() -> dict[str,str]:
     return {"status":"ok"}
+
+@app.get("/version", tags=["health"])
+async def version() -> dict[str, str]:
+    return {"version": app.version}

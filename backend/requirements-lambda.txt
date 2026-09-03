@@ -1,0 +1,12 @@
+#everything Lambda needs so your FastAPI backend can run correctly in AWS
+
+fastapi
+sqlalchemy[asyncio]
+asyncpg
+pydantic==2.13.4
+pydantic-core==2.46.4
+bcrypt
+PyJWT
+mangum
+python-multipart
+
