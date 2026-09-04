@@ -1,13 +1,12 @@
-import os
+from app.config import settings
 
+from fastapi.responses import JSONResponse
+from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from app.routers import equipment, work_order, auth
 
-FRONTEND_ORIGIN = os.environ.get(
-    "FRONTEND_ORIGIN",
-    "http://localhost:5173"
-)
+FRONTEND_ORIGIN = settings.frontend_origin
 
 app = FastAPI(
     title="MedFlow Clinical Equipment Command Center",
@@ -42,3 +41,47 @@ async def health_check() -> dict[str,str]:
 @app.get("/version", tags=["health"])
 async def version() -> dict[str, str]:
     return {"version": app.version}
+
+
+
+# BEGIN EXCEPTIONS
+
+# Handles database constraint errors such as duplicate unique values.
+@app.exception_handler(IntegrityError)
+async def integrity_error_handler(
+    request: Request,
+    exc: IntegrityError,
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=409,
+        content={
+            "detail": "A database constraint was violated (e.g. a duplicate value)"
+        },
+    )
+
+
+
+# Handles database constraint errors such as duplicate unique values.
+@app.exception_handler(IntegrityError)
+async def integrity_error_handler(
+    request: Request,
+    exc: IntegrityError,
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=409,
+        content={
+            "detail": "A database constraint was violated (e.g. a duplicate value)"
+        },
+    )
+
+
+# Catch-all for unexpected errors so the API always returns clean JSON.
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(
+    request: Request,
+    exc: Exception,
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "An unexpected error has occurred."},
+    )

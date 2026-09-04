@@ -1,10 +1,10 @@
-import os 
+from app.config import settings
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
 import jwt
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "<replace-with-a-real-secret-key")
+SECRET_KEY = settings.secret_key
 
 ALGORITHM = "HS256"
 

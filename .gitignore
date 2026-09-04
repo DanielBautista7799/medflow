@@ -22,3 +22,4 @@ frontend/dist/
 backend/lambda-env.json
 backend/package/
 backend/lambda_deployment.zip
+backend/.env

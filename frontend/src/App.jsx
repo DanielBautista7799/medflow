@@ -1,5 +1,12 @@
-import { Container, Typography, Box } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Snackbar,
+  Alert,
+} from '@mui/material';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
+import { useState } from 'react';
 
 import AppHeader from './components/layout/AppHeader.jsx';
 import LoginForm from './components/auth/LoginForm.jsx';
@@ -21,6 +28,7 @@ function App() {
 // token is the encoded JWT string; user is the decoded token payload with fields like sub and role.
 function Dashboard() {
   const {user, logout} = useAuth()
+  const [notification, setNotification] = useState(null);
   return(
     <>
       <AppHeader 
@@ -34,7 +42,7 @@ function Dashboard() {
           </Typography>
 
           <Box sx={{ mb: 4 }}>
-              <EquipmentDataGrid />
+              <EquipmentDataGrid onSuccess={setNotification}/>
           </Box>
 
                 <Typography variant="h5" component="h2" gutterBottom>
@@ -45,6 +53,18 @@ function Dashboard() {
               <DiscrepancyDataGrid />
           </Box>
       </Container>
+        <Snackbar
+            open={Boolean(notification)}
+            autoHideDuration={4000}
+            onClose={() => setNotification(null)}
+        >
+            <Alert
+                severity="success"
+                onClose={() => setNotification(null)}
+            >
+              {notification}
+          </Alert>
+      </Snackbar>
     </>
   )
 }
