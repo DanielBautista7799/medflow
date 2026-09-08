@@ -10,3 +10,4 @@ PyJWT
 mangum
 python-multipart
 
+pydantic-settings

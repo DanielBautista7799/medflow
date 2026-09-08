@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Request
-from app.routers import equipment, work_order, auth
+from app.routers import equipment, work_order, auth, hospitals
 
 FRONTEND_ORIGIN = settings.frontend_origin
 
@@ -30,6 +30,7 @@ app.add_middleware(
 app.include_router(equipment.router)
 app.include_router(work_order.router)
 app.include_router(auth.router)
+app.include_router(hospitals.router)
 
 
 

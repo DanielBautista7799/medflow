@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy import select
+from sqlalchemy import select, case, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.dependencies import get_db, get_current_user, require_role
 from app.models.work_order import WorkOrder
-from app.schemas.work_order import WorkOrderRead, WorkOrderStatusUpdate, CoLocationDiscrepancyRead
+from app.schemas.work_order import WorkOrderRead, WorkOrderStatusUpdate, CoLocationDiscrepancyRead, ReliabilityMetric
 from app.models.enums import WorkOrderPriority, WorkOrderStatus, UserRole
 from app.models.equipment import Equipment
 from app.models.technician import Technician
@@ -32,7 +32,36 @@ async def get_colocation_dependancies(db: AsyncSession = Depends(get_db), curren
     result = await db.execute(statement)
     return [dict(row)for row in result.mappings().all()]
 
-    
+@router.get("/reliability", response_model=list[ReliabilityMetric])
+async def reliability_metrics(
+    db: AsyncSession = Depends(get_db),
+    _: User = Depends(get_current_user),
+):
+    statement = (
+        select(
+            Equipment.model,
+            func.count(WorkOrder.id).label("total_work_orders"),
+            func.sum(
+                case(
+                    (WorkOrder.status == WorkOrderStatus.COMPLETED, 1),
+                    else_=0,
+                )
+            ).label("completed_count"),
+            func.sum(
+                case(
+                    (WorkOrder.status == WorkOrderStatus.FAILED, 1),
+                    else_=0,
+                )
+            ).label("failed_count"),
+        )
+        .join(WorkOrder, WorkOrder.equipment_id == Equipment.id)
+        .group_by(Equipment.model)
+        .order_by(Equipment.model)
+    )
+
+    result = await db.execute(statement)
+
+    return [dict(row) for row in result.mappings().all()]
 
 
 
@@ -65,3 +94,5 @@ async def update_work_order_status(work_order_id: int, update: WorkOrderStatusUp
     await db.commit()
     await db.refresh(work_order)
     return work_order
+
+

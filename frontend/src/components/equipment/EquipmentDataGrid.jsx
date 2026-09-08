@@ -5,6 +5,7 @@ import {
     Box,
     Button,
     CircularProgress,
+    Chip,
     Dialog,
     DialogActions,
     DialogContent,
@@ -22,7 +23,7 @@ const columns = [
     { field: 'serial_number', headerName: 'Serial Number', width: 150 },
     { field: 'model', headerName: 'Model', width: 150 },
     { field: 'status', headerName: 'Status', width: 140 },
-    { field: 'charge_level', headerName: 'Charge Level', width: 130 },
+    { field: 'charge_level', headerName: 'Charge Level', width: 130 , valueGetter: (value) => Number(value), renderCell: (params) => ( <Chip label={`${params.value}%`} color={Number(params.value) < 20 ? 'error' : 'success'} size="small" />),},
     { field: 'facility_id', headerName: 'Facility ID', width: 110 },
 ];
 
@@ -145,7 +146,7 @@ return (
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
     >
-        <DialogTitle>Add New Equipment</DialogTitle>
+        <DialogTitle   sx={{color: '#1f2937', fontWeight: 600,}} >Add New Equipment</DialogTitle>
 
         <DialogContent>
         <Stack spacing={2} sx={{ mt: 1, minWidth: 300 }}>

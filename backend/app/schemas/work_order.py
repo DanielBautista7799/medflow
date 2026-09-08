@@ -20,3 +20,10 @@ class CoLocationDiscrepancyRead(BaseModel):
     equipment_facility_id:int
     technician_facility_id: int
     model_config = ConfigDict(from_attributes=True)
+
+
+class ReliabilityMetric(BaseModel):
+    model: str
+    total_work_orders: int
+    completed_count: int
+    failed_count: int
