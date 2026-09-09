@@ -173,6 +173,6 @@ By the conclusion of the workshop, participants must present a working deploymen
 ### Showcase Evaluation Criteria
 
 1. **Live Cloud URL:** Walking through the application hosted live on AWS CloudFront connected to the backend on AWS EC2/Lambda and AWS RDS.
-2. **RBAC Walkthrough:** Demonstrating role restrictions (e.g., logging in as a *Clinical Admin* to modify equipment assets vs. a *Field Technician* uploading an S3 service report).
-3. **Data Grid & Analytical Dashboard:** Demonstrating live filtering, searching, and accurate metrics addressing the business questions.
+2. **RBAC Walkthrough:** Demonstrating role restrictions (e.g., logging in as a *Clinical Admin* to modify equipment assets vs. a *Field Technician* uploading an S3 service report). **NEED TO IMPLEMENT ON FRONTEND
+3. **Data Grid & Analytical Dashboard:** Demonstrating live filtering, searching, and accurate metrics addressing the business questions. (More in depth could be better currently just built in react component)
 4. **Codebase Architecture Tour:** A brief walk-through of Pydantic validation schemas, FastAPI dependencies (`Depends`), SQLAlchemy database sessions, and MUI state management.
