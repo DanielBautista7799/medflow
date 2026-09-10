@@ -48,6 +48,21 @@ npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
 install datagrid
 npm install axios @mui/x-data-grid
 
+LIVE REDEPLOY
+cd ~/medflow/backend                                     
+  
+rm -rf package/app                       
+cp -R app package/app          
+cp lambda_handler.py package/lambda_handler.py
+
+rm -f lambda_deployment.zip 
+
+cd package                             
+zip -r ../lambda_deployment.zip . >/dev/null
+cd ..                        
+  
+ls -lh lambda_deployment.zip
+
 ## 1. Business Context
 
 **Halcyon Health Systems** operates a network of hospitals and outpatient clinics that rely on a large shared pool of portable medical equipment — infusion pumps, ventilators, patient monitors, and mobile imaging carts. Currently, equipment usage records, maintenance schedules, technician assignments, and service reports are scattered across paper logs and spreadsheet files kept at each site.
